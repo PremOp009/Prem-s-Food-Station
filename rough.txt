@@ -1,0 +1,161 @@
+ <section id="menu-section" class="menu-container">
+    <h2 class="section-title">Our Top Picks 🍴</h2>
+    <div class="menu-grid" id="menu-grid"></div>
+    </section>
+
+
+
+
+
+/* =====================
+   MENU SECTION
+===================== */
+.menu-container {
+    padding: 80px 10%;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    color: #222;
+    font-weight: 700;
+}
+
+/* THE GRID SYSTEM */
+.menu-grid {
+    display: grid;
+    /* Auto-fit magic: fits as many cards as possible */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* THE CARD */
+.food-card {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: left;
+}
+
+.food-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(226, 55, 68, 0.2);
+}
+
+.card-img {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.card-content h3 {
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.card-content p {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #e23744;
+}
+
+.order-btn {
+    padding: 10px 20px;
+    background: #333;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.order-btn:hover {
+    background: #e23744;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* =====================
+   DYNAMIC MENU SYSTEM
+===================== */
+const menuData = [
+    {
+        id: 1,
+        title: "Maharaja Burger",
+        desc: "Double patty, spicy jalapenos, and melted cheese overload.",
+        price: "₹149", // Using Rupees for local vibe!
+        img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd"
+    },
+    {
+        id: 2,
+        title: "Tandoori Paneer Pizza",
+        desc: "Wood-fired crust topped with smoky paneer cubes and mint mayo.",
+        price: "₹299",
+        img: "https://images.unsplash.com/photo-1513104890138-7c749659a591"
+    },
+    {
+        id: 3,
+        title: "Hazelnut Cold Coffee",
+        desc: "Rich espresso blended with creamy milk and hazelnut syrup.",
+        price: "₹120",
+        img: "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5"
+    }
+];
+
+const menuGrid = document.getElementById('menu-grid');
+
+// Loop through data and create HTML
+function renderMenu() {
+    menuGrid.innerHTML = menuData.map(item => `
+        <div class="food-card">
+            <div class="card-img" style="background-image: url('${item.img}');"></div>
+            <div class="card-content">
+                <h3>${item.title}</h3>
+                <p>${item.desc}</p>
+                <div class="card-footer">
+                    <span class="price">${item.price}</span>
+                    <button class="order-btn" onclick="orderNow('${item.title}')">Add +</button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Simple interaction for the button
+function orderNow(foodName) {
+    alert(`Yum! 😋 You added ${foodName} to your cart.`);
+}
+
+// Run the function on load
+renderMenu();
