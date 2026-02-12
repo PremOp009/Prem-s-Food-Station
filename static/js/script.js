@@ -1,4 +1,3 @@
-
 /* =========================================
    1. GLOBAL LOGIC (Runs everywhere) 🌍
 ========================================= */
@@ -236,13 +235,13 @@ async function placeOrder(event) {
 
     try {
         // Send to Python Server (Make sure app.py is running!)
-       // OLD: const response = await fetch('http://127.0.0.1:5000/place_order', { ...
-
-// NEW (Example):
-const response = await fetch('https://prem-food-backend.onrender.com/place_order', { 
-    method: 'POST',
-    // ... rest of code
-});
+        const response = await fetch('http://127.0.0.1:5000/place_order', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(orderData)
+        });
 
         const result = await response.json();
 

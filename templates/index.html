@@ -4,106 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prem's Food Station</title>
-
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='C:\Users\baps\Desktop\Prem's Food Station\static\css\style.css') }}">
-    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
-
 <body>
 
-<header id="navbar">
-    <div class="logo">
-        <span class="logo-text">Prem’s Food Station</span>
-    </div>
-
-    <nav>
-        <ul class="nav-links">
-            <li>
-                <a href="{{ url_for('home') }}" class="active">Home</a>
-            </li>
-            <li>
-                <a href="{{ url_for('menu') }}">Menu</a>
-            </li>
-            <li>
-                <a href="{{ url_for('about') }}">About Us</a>
-            </li>
-        </ul>
-
-        <div class="nav-extras">
-            <div class="cart-btn" onclick="toggleCart()">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="9" cy="21" r="1"></circle>
-                    <circle cx="20" cy="21" r="1"></circle>
-                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                </svg>
-                <span id="cart-count">0</span>
-            </div>
-
-            <div class="hamburger" id="hamburger">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-            </div>
+    <header id="navbar">
+        <div class="logo">
+            <span class="logo-text">Prem’s Food Station</span>
         </div>
-    </nav>
-</header>
 
-<main>
-    <section class="hero">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1>Welcome to <span class="highlight">Prem's Food Station</span></h1>
-            <p>Craving something fire? We got you. 🔥</p>
+        <nav>
+            <ul class="nav-links">
+                <li><a class='active' href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="about.html">About Us</a></li>
+            </ul>
 
-            <!-- 🔥 FIXED BUTTON -->
-            <button
-                id="exploreBtn"
-                class="btn"
-                type="button"
-                <button id="exploreBtn" class="btn" data-menu-url="{{ url_for('menu') }}">
-    Explore Our Menu
-</button>
+            <div class="nav-extras">
+                <div class="cart-btn" onclick="toggleCart()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span id="cart-count">0</span>
+                </div>
 
+                <div class="hamburger" id="hamburger">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1>Welcome to <span class="highlight">Prem's Food Station</span></h1>
+                <p>Craving something fire? We got you. 🔥</p>
+                <button id="exploreBtn" class="btn">Explore Our Menu</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Copyright &copy; 2026 Prem's Food Station. Made with ❤️ by Mr. Prem.</p>
+    </footer>
+
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Cart 🍔</h3>
+            <span class="close-cart" onclick="toggleCart()">×</span>
         </div>
-    </section>
-</main>
+        
+        <div class="cart-items" id="cart-items">
+            <p class="empty-msg">Your cart is empty. 😢</p>
+        </div>
 
-<footer>
-    <p>Copyright &copy; 2026 Prem's Food Station. Made with ❤️ by Mr. Prem.</p>
-</footer>
-
-<!-- Cart Sidebar -->
-<div class="cart-sidebar" id="cart-sidebar">
-    <div class="cart-header">
-        <h3>Your Cart 🍔</h3>
-        <span class="close-cart" onclick="toggleCart()">×</span>
+        <div class="cart-footer">
+            <div class="total">Total: <span id="cart-total">₹0</span></div>
+            <button class="checkout-btn" onclick="checkout()">Checkout 🚀</button>
+        </div>
     </div>
 
-    <div class="cart-items" id="cart-items">
-        <p class="empty-msg">Your cart is empty. 😢</p>
-    </div>
-
-    <div class="cart-footer">
-        <div class="total">Total: <span id="cart-total">₹0</span></div>
-        <button class="checkout-btn" onclick="checkout()">Checkout 🚀</button>
-    </div>
-</div>
-
-<!-- Checkout Modal -->
-<div id="checkout-modal" class="modal-overlay">
+    <div id="checkout-modal" class="modal-overlay">
     <div class="modal-content">
         <span class="close-modal" onclick="closeModal()">×</span>
-
+        
         <h2>Confirm Order 🚀</h2>
         <p>You're one step away from deliciousness!</p>
-
+        
         <form id="checkout-form" onsubmit="placeOrder(event)">
             <div class="form-group">
                 <label>Full Name</label>
                 <input type="text" id="cust-name" placeholder="Ex: Mr. Prem" required>
             </div>
-
+            
             <div class="form-group">
                 <label>Delivery Address</label>
                 <textarea id="cust-address" placeholder="Ex: Room 402, Hostel Block A..." required></textarea>
@@ -118,5 +98,6 @@
     </div>
 </div>
 
+    <script src="/static/js/script.js"></script>
 </body>
 </html>

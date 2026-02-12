@@ -620,6 +620,17 @@ nav {
 .stat-box h3 { font-size: 1.5rem; color: #333; }
 .stat-box span { font-size: 0.9rem; color: #888; }
 
-/* =====================
-   RESPONSIVE FIXES 📱
-===================== */
+/* Responsive */
+@media (max-width: 768px) {
+    .about-card { flex-direction: column; }
+    .founder-img { height: 300px; }
+}
+
+.founder-img {
+    flex: 1;
+    min-width: 300px;
+    height: 400px;
+    background-size: cover; /* Keeps it filling the box */
+    background-position: center top; /* Focuses on your face (top of image) */
+    background-repeat: no-repeat;
+}
